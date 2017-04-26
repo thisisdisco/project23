@@ -1,0 +1,60 @@
+import java.util.Scanner;
+import java.util.Random;
+
+
+public class Sdvig {
+    
+    public static void main(String... args) {
+    
+    
+    Scanner in = new Scanner(System.in);
+    System.out.println("Введите число k");
+    int k = in.nextInt();//считываем целое число
+    
+    System.out.print("Исходный массив: ");
+    Random rand = new Random();
+    int mass[] = new int[10];
+    for(int i = 0; i < 10; i++)
+    {
+    mass[i] = rand.nextInt(20);
+    
+    }
+    for (int i : mass) {
+    System.out.print(i + " ");
+    }
+    
+    System.out.println();
+    new Sdvig().reverse(mass, k); // кидаем массив и число на которое нужно
+    // сдвинуть
+    System.out.print("Массив после сдвига: ");
+    for (int i : mass) {
+    System.out.print(i + " ");
+    }
+    
+    }
+    
+    public int[] reverse(int[] input, int sdvig) {
+    if (sdvig > input.length || sdvig < 1) {
+    System.out.println("Неверное количество сдвигов");
+    return input;
+    }
+    
+    int[] output = new int[input.length];
+    int j = 0;
+    for (int i : input) {
+    output[j++] = i;
+    }
+    int tmp = sdvig;
+    
+    for (int i = 0; i < output.length; i++) {
+    if (sdvig > 0) {
+    input[i] = output[output.length - sdvig];
+    sdvig--;
+    } else {
+    input[i] = output[i - tmp];
+    }
+    }
+    return input;
+    }
+    
+}
